@@ -1,0 +1,8 @@
+# AutoConfigurations
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  WebSocketFluxAutoConfiguration
+
+org.springframework.boot.diagnostics.FailureAnalyzer=\
+  WebSocketAutoConfigurationFailureAnalyzer
+
+
