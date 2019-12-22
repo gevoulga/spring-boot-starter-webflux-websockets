@@ -1,10 +1,12 @@
 package ch.voulgarakis.spring.boot.starter.webflux.websockets.autoconfigure;
 
+import ch.voulgarakis.spring.boot.starter.webflux.websockets.converter.WebSocketMessageConverter;
 import ch.voulgarakis.spring.boot.starter.webflux.websockets.handler.WebSocketFluxHandlerMapping;
 import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.reactive.socket.WebSocketHandler;
 import org.springframework.web.reactive.socket.server.WebSocketService;
 import org.springframework.web.reactive.socket.server.support.HandshakeWebSocketService;
@@ -34,5 +36,11 @@ public class WebSocketFluxAutoConfiguration {
     @ConditionalOnMissingBean
     public WebSocketService webSocketService() {
         return new HandshakeWebSocketService(new ReactorNettyRequestUpgradeStrategy());
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public WebSocketMessageConverter webSocketMessageConverter(List<HttpMessageConverter> converters) {
+        return new WebSocketMessageConverter(converters);
     }
 }
